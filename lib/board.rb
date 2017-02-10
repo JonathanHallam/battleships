@@ -32,6 +32,14 @@ class Playing_field
 
   end
 
+  def x_hash
+    @x_coord_hash
+  end
+
+  def use_board
+    @board
+  end
+
   def show_board
     puts
     puts
