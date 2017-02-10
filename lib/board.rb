@@ -1,9 +1,9 @@
+require 'ships'
+
 
 class Playing_field
 
-
-
-  attr_accessor :board, :x_coord_hash
+  attr_accessor :board, :x_coord_hash, :carrier, :battleship, :submarine, :destroyer, :patrol
   def initialize
     @board = [
                 ["---YOUR BATTLEFIELD---","---","-OPPONENT BATTLEFIELD-"],
@@ -24,6 +24,11 @@ class Playing_field
                       "F" => 6, "G" => 7, "H" => 8, "I" => 9, "J" => 10
                       }
 
+    @carrier = Aircraft_carrier.new
+    @battleship = Battleship.new
+    @submarine = Submarine.new
+    @destroyer = Destroyer.new
+    @patrol = Patrol.new
 
   end
 
@@ -39,19 +44,14 @@ class Playing_field
     coord = place[-1]
     if direction == "horizontal"
       coord = place[-1]
-
-      # => So here I'd much prefer to link it to the ships, so have an instance of each ship
-      # => for each player and import in their values, more class oriented
-
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 4)] = ["X", "X", "X", "X", "X"]
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 4)] = @carrier.show
       @board[place.chop.to_i + 1].flatten
     else
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 4][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 5][@x_coord_hash[coord]] = "X"
-
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = @carrier.show[0]
+      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @carrier.show[1]
+      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = @carrier.show[2]
+      @board[place.chop.to_i + 4][@x_coord_hash[coord]] = @carrier.show[3]
+      @board[place.chop.to_i + 5][@x_coord_hash[coord]] = @carrier.show[4]
     end
   end
 
@@ -59,13 +59,13 @@ class Playing_field
     coord = place[-1]
     if direction == "horizontal"
       coord = place[-1]
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 3)] = ["X", "X", "X", "X"]
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 3)] = @battleship.show
       @board[place.chop.to_i + 1].flatten
     else
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 4][@x_coord_hash[coord]] = "X"
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = @battleship.show[0]
+      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @battleship.show[1]
+      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = @battleship.show[2]
+      @board[place.chop.to_i + 4][@x_coord_hash[coord]] = @battleship.show[3]
     end
   end
 
@@ -73,12 +73,12 @@ class Playing_field
     coord = place[-1]
     if direction == "horizontal"
       coord = place[-1]
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 2)] = ["X", "X", "X"]
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 2)] = @submarine.show
       @board[place.chop.to_i + 1].flatten
     else
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = "X"
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = @submarine.show[0]
+      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @submarine.show[1]
+      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = @submarine.show[2]
     end
   end
 
@@ -86,24 +86,23 @@ class Playing_field
     coord = place[-1]
     if direction == "horizontal"
       coord = place[-1]
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 2)] = ["X", "X", "X"]
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 2)] = @destroyer.show
       @board[place.chop.to_i + 1].flatten
     else
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = "X"
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = @destroyer.show[0]
+      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @destroyer.show[1]
+      @board[place.chop.to_i + 3][@x_coord_hash[coord]] = @destroyer.show[2]
     end
   end
 
   def place_patrol(place, direction)
     coord = place[-1]
     if direction == "horizontal"
-      coord = place[-1]
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 1)] = ["X", "X"]
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]..(@x_coord_hash[coord] + 1)] = @patrol.show
       @board[place.chop.to_i + 1].flatten
     else
-      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = "X"
-      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = "X"
+      @board[place.chop.to_i + 1][@x_coord_hash[coord]] = @patrol.show[0]
+      @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @patrol.show[1]
     end
   end
 
