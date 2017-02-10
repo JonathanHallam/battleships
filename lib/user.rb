@@ -4,7 +4,7 @@ require 'board'
 class User_input
 
 
-  attr_accessor :mock_board, :x_hash
+  attr_accessor   :mock_board, :x_hash
   def initialize
     @mock_board = [
       ["---YOUR BATTLEFIELD---","---","-OPPONENT BATTLEFIELD-"],
@@ -47,6 +47,27 @@ class User_input
       a = running_total.map { |x| @mock_board[y_coord + x][x_coord] }
       return false if a.include?("X") ; true
     end
+  end
+
+  def swap_coords(coord)
+    coord.upcase!
+    if coord.start_with?("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+      return coord[1..-1] + coord[0]
+    else
+      coord
+    end
+  end
+
+  def hit(coord)
+    # => So for p1 this needs to hit a place on the p2
+    # => board and on a different co-ordinate on the
+    # => p1 board, also needs to change the state of
+    # => the ship that's been hit. So maybe the placement
+    # => of each ship needs to be recorded somehow.
+    # => Also need to define what 'sunk' is, and it's possible
+    # => that my placement should have each cell linked
+    # => to the ship array.
+
   end
 
 end

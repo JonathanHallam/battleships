@@ -67,4 +67,30 @@ describe User_input do
     expect(a.check_clashes("4E", "horizontally", 2)).to eq(false)
   end
 
+  it "moves the y co-ordinate to the end of the string if it's not already 1" do
+    a = User_input.new
+    expect(a.swap_coords("G10")).to eq("10G")
+  end
+
+  it "moves the y co-ordinate to the end of the string if it's not already 2" do
+    a = User_input.new
+    expect(a.swap_coords("G8")).to eq("8G")
+  end
+
+  it "changes the case of input if it's wrong" do
+    a = User_input.new
+    expect(a.swap_coords("8g")).to eq("8G")
+  end
+
+  it "does both" do
+    a = User_input.new
+    expect(a.swap_coords("h4")).to eq("4H")
+  end
+
+  it "does everything we've built so far" do
+    a = User_input.new
+    place = a.swap_coords("h4")
+    expect(a.check_clashes(place, "vertically", 3)).to eq(false)
+  end
+
 end
