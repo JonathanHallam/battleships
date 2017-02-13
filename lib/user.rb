@@ -1,14 +1,12 @@
-require 'ships'
-require 'board'
+require './board.rb'
 
 class User_input
 
 
-  attr_accessor :board_total # :mock_board, :x_hash
+  attr_accessor :board_total
   def initialize
 
     @board_total = Playing_field.new
-
 
 # => This is what the board in the test case "should" look like
 #      ["---YOUR BATTLEFIELD---","---","-OPPONENT BATTLEFIELD-"],
@@ -27,16 +25,16 @@ class User_input
 
   end
 
-  def use_field
+  def user_class
     @board_total
   end
 
   def check_placement(place, direction, ship_length)
 
-    if direction == "horizontally"
+    if direction == "horizontal"
       return false if @board_total.x_hash[place[-1]] >= 12 - ship_length ; true
-    elsif direction == "vertically"
-      return false if place.chomp.to_i >= 12 - ship_length ; true
+    elsif direction == "vertical"
+      return false if place.chop.to_i >= 12 - ship_length ; true
     end
   end
 
@@ -45,12 +43,12 @@ class User_input
     y_coord = place.chop.to_i + 1
     if check_placement(place, direction, ship_length) == false
       false
-    elsif direction == "horizontally"
+    elsif direction == "horizontal"
       going_here = @board_total.use_board[y_coord][x_coord...x_coord + ship_length]
       return false if going_here.include?("X") ; true
-    elsif direction == "vertically"
+    elsif direction == "vertical"
       running_total = [*0...ship_length]
-      a = running_total.map { |x| @board_total.use_board[y_coord + x][x_coord] }
+      a = running_total.map { |x| user_class.use_board[y_coord + x][x_coord] }
       return false if a.include?("X") ; true
     end
   end
@@ -61,6 +59,15 @@ class User_input
       return coord[1..-1] + coord[0]
     else
       coord
+    end
+  end
+
+  def change_orientation(ord)
+    ord.downcase!
+    if ord.start_with?("h", "1")
+      return "horizontal"
+    else
+      "vertical"
     end
   end
 

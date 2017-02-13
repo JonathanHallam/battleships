@@ -4,63 +4,63 @@ describe User_input do
 
  before(:each) do
    @start = User_input.new
-   @start.use_field.place_ac("4F", "horizontally")
-   @start.use_field.place_battleship("1B", "vertically")
-   @start.use_field.place_sub("6D", "horizontally")
-   @start.use_field.place_destroyer("8I", "vertically")
-   @start.use_field.place_patrol("9B", "horizontally")
+   @start.user_class.place_ac("4F", "horizontal")
+   @start.user_class.place_battleship("1B", "vertical")
+   @start.user_class.place_sub("6D", "horizontal")
+   @start.user_class.place_destroyer("8I", "vertical")
+   @start.user_class.place_patrol("9B", "horizontal")
  end
 
   it "checks aircraft carrier co-ordinates 1" do
-    expect(@start.check_placement("1A", "vertically", 5)).to eq(true)
+    expect(@start.check_placement("1A", "vertical", 5)).to eq(true)
   end
 
   it "checks aircraft carrier co-ordinates 2" do
-    expect(@start.check_placement("1G", "horizontally", 5)).to eq(false)
+    expect(@start.check_placement("1G", "horizontal", 5)).to eq(false)
   end
 
   it "checks aircraft carrier co-ordinates 3" do
-    expect(@start.check_placement("7D", "horizontally", 5)).to eq(true)
+    expect(@start.check_placement("7D", "horizontal", 5)).to eq(true)
   end
 
   it "checks aircraft carrier co-ordinates 4" do
-    expect(@start.check_placement("8c", "vertically", 5)).to eq(false)
+    expect(@start.check_placement("8c", "vertical", 5)).to eq(false)
   end
 
   it "checks aircraft carrier co-ordinates 5" do
-    expect(@start.check_placement("3H", "vertically", 5)).to eq(true)
+    expect(@start.check_placement("3H", "vertical", 5)).to eq(true)
   end
 
   it "checks warship carrier co-ordinates 1" do
-    expect(@start.check_placement("3H", "vertically", 4)).to eq(true)
+    expect(@start.check_placement("3H", "vertical", 4)).to eq(true)
   end
 
   it "checks warship carrier co-ordinates 2" do
-    expect(@start.check_placement("3H", "horizontally", 4)).to eq(false)
+    expect(@start.check_placement("3H", "horizontal", 4)).to eq(false)
   end
 
   it "checks warship carrier co-ordinates 3" do
-    expect(@start.check_placement("10G", "horizontally", 4)).to eq(true)
+    expect(@start.check_placement("10G", "horizontal", 4)).to eq(true)
   end
 
   it "checks for existing ships 1" do
-    expect(@start.check_clashes("10G", "horizontally", 4)).to eq(false)
+    expect(@start.check_clashes("10G", "horizontal", 4)).to eq(false)
   end
 
   it "checks for existing ships 2" do
-    expect(@start.check_clashes("7G", "vertically", 4)).to eq(true)
+    expect(@start.check_clashes("7G", "vertical", 4)).to eq(true)
   end
 
   it "checks for existing ships 3" do
-    expect(@start.check_clashes("7G", "vertically", 5)).to eq(false)
+    expect(@start.check_placement("7G", "vertical", 5)).to eq(false)
   end
 
   it "checks for existing ships 4" do
-    expect(@start.check_clashes("4E", "vertically", 2)).to eq(true)
+    expect(@start.check_clashes("4E", "vertical", 2)).to eq(true)
   end
 
   it "checks for existing ships 5" do
-    expect(@start.check_clashes("4E", "horizontally", 2)).to eq(false)
+    expect(@start.check_clashes("4E", "horizontal", 2)).to eq(false)
   end
 
   it "moves the y co-ordinate to the end of the string if it's not already 1" do
@@ -81,7 +81,7 @@ describe User_input do
 
   it "does everything we've built so far" do
     place = @start.swap_coords("h4")
-    expect(@start.check_clashes(place, "vertically", 3)).to eq(true)
+    expect(@start.check_clashes(place, "vertical", 3)).to eq(false)
   end
 
 end
