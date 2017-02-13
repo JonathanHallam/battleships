@@ -104,4 +104,21 @@ describe Playing_field do
       ])
   end
 
+  it "checks for ships on the board" do
+    player_one = new_board
+    expect(player_one.check_for_ship("1A")).to eq(false)
+  end
+
+  it "checks for ships on the board 2" do
+    player_one = new_board
+    player_one.place_ac("1A", "horizontal")
+    expect(player_one.check_for_ship("1A")).to eq(true)
+  end
+
+  it "checks for ships on the board 2" do
+    player_one = new_board
+    player_one.place_ac("10F", "horizontal")
+    expect(player_one.check_for_ship("10H")).to eq(true)
+  end
+
 end

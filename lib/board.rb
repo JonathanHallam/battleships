@@ -1,4 +1,4 @@
-require 'ships'
+require './ships.rb'
 
 
 class Playing_field
@@ -113,6 +113,12 @@ class Playing_field
       @board[place.chop.to_i + 2][@x_coord_hash[coord]] = @patrol.show[1]
     end
   end
+
+  def check_for_ship(coord)
+    @board[coord.chop.to_i + 1][@x_coord_hash[coord[-1]]] == "X"
+  end
+
+
 
 end
 
