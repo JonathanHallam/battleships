@@ -1,12 +1,12 @@
 require './field.rb'
 
-puts "\tYou there"
-puts "\tWhat is your name?"
-print "\t>>"
+puts "\n\tYou there\n"
+puts "\n\tWhat is your name?\n"
+print "\n\t>>"
 @name1 = $stdin.gets.chomp.capitalize
-puts "\tGreetings Admiral #{@name1}"
-puts "\tWhat is your opponents name?"
-print "\t>>"
+puts "\n\tGreetings Admiral #{@name1}\n"
+puts "\n\tWhat is your opponents name?\n"
+print "\n\t>>"
 @name2 = $stdin.gets.chomp.capitalize
 
 @game = new_game
@@ -211,8 +211,11 @@ def hit_cycle
   hit_2 = @game.p1.swap_coords(hit_1)
   @game.player_one_hit(hit_2)
   @game.p1.user_class.show_board
-  sleep(5)
+  sleep(2)
+  puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
   puts "\tPlease pass over to Admiral #{@name2}."
+  sleep(2)
+  exit(0) if @game.p1.user_class.show_board.flatten.include?("X") == false
   puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
   puts "\tAdmiral #{@name2}, where do we aim?"
   @game.p2.user_class.show_board
@@ -220,8 +223,10 @@ def hit_cycle
   hit_4 = @game.p1.swap_coords(hit_3)
   @game.player_two_hit(hit_4)
   @game.p2.user_class.show_board
-  sleep(5)
+  sleep(2)
+  puts "\n\n\n\n\n\n\n\n\n\n\n"
   puts "\tPlease pass over to Admiral #{@name1}."
+  sleep(2)
   puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 end
 
@@ -239,6 +244,7 @@ put_down_patrol
 puts "\tAdmiral #{@name1}, this is your board\n"
 @game.p1.user_class.show_board
 puts "\tPlease pass over to Admiral #{@name2}."
+sleep(5)
 puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
 puts "\tAdmiral #{@name2}\n\n"
 @game.p2.user_class.show_board
@@ -253,6 +259,16 @@ put_down_sub_2
 put_down_patrol_2
 @game.p2.user_class.show_board
 
+puts "Please pass over to Admiral #{@name1}"
+sleep(5)
+puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+
 until @game.p1.user_class.show_board.flatten.include?("X") == false || @game.p2.user_class.show_board.flatten.include?("X") == false
   hit_cycle
+end
+puts "\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+if @game.p2.user_class.show_board.flatten.include?("X") == false
+  puts "Congratulations Admiral #{@name1}, our enemies lie t the bottom of the sea"
+else
+  puts "Congratulations Admiral #{@name2}, our enemies lie t the bottom of the sea"
 end
