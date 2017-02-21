@@ -4,11 +4,11 @@ describe User_input do
 
  before(:each) do
    @start = User_input.new
-   @start.user_class.place_ac("4F", "horizontal")
-   @start.user_class.place_battleship("1B", "vertical")
-   @start.user_class.place_sub("6D", "horizontal")
-   @start.user_class.place_destroyer("8I", "vertical")
-   @start.user_class.place_patrol("9B", "horizontal")
+   @start.board_total.place_ac("4F", "horizontal")
+   @start.board_total.place_battleship("1B", "vertical")
+   @start.board_total.place_sub("6D", "horizontal")
+   @start.board_total.place_destroyer("8I", "vertical")
+   @start.board_total.place_patrol("9B", "horizontal")
  end
 
   it "checks aircraft carrier co-ordinates 1" do

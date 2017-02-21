@@ -16,10 +16,6 @@ class Ships
     puts "Your #{@name} has been sunk."
   end
 
-  def show
-    @ship
-  end
-
   def hit(coord)
     @ship[coord] = "@"
   end
@@ -30,7 +26,7 @@ class Aircraft_carrier < Ships
 
   attr_accessor :ship, :name
   def initialize
-    @ship = ["X", "X", "X", "X", "X"]
+    @ship = []
     @name = "aircraft carrier"
   end
 
@@ -40,7 +36,7 @@ class Battleship < Ships
 
   attr_accessor :ship, :name
   def initialize
-    @ship = ["X", "X", "X", "X"]
+    @ship = []
     @name = "battleship"
   end
 
@@ -50,7 +46,7 @@ class Submarine < Ships
 
   attr_accessor :ship, :name
   def initialize
-    @ship = ["X", "X", "X"]
+    @ship = []
     @name = "submarine"
   end
 
@@ -60,7 +56,7 @@ class Destroyer < Ships
 
   attr_accessor :ship, :name
   def initialize
-    @ship = ["X", "X", "X"]
+    @ship = []
     @name = "destroyer"
   end
 
@@ -70,10 +66,8 @@ class Patrol < Ships
 
   attr_accessor :ship, :name
   def initialize
-    @ship = ["X", "X"]
+    @ship = []
     @name = "patrol boat"
   end
-
-
 
 end

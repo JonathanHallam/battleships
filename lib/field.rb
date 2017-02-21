@@ -15,32 +15,18 @@ class Field
     }
   end
 
-  def p1
-    @player_one
-  end
-
-  def p2
-    @player_two
-  end
-
-
-  # => So all of the definitions up till now have been pretty simple, now I need to work
-  # => on the hitting element, all of the actual gameplay will be held separately.
-  # => Start point is going to be creating something that checks the status of a
-  # => cell on the board.
-
   def player_one_hit(coord)
 
     a = coord.chop.to_i + 1
     b = @opponent_x_coord[coord[-1]]
-    c = @player_one.user_class.x_hash[coord[-1]]
+    c = @player_one.board_total.x_coord_hash[coord[-1]]
 
-    if @player_two.user_class.check_for_ship(coord) == true
-      @player_one.user_class.use_board[a][b] = "@"
-      @player_two.user_class.use_board[a][c] = "@"
+    if @player_two.board_total.check_for_ship(coord) == true
+      @player_one.board_total.board[a][b] = "@"
+      @player_two.board_total.board[a][c] = "@"
     else
-      @player_one.user_class.use_board[a][b] = "o"
-      @player_two.user_class.use_board[a][c] = "o"
+      @player_one.board_total.board[a][b] = "o"
+      @player_two.board_total.board[a][c] = "o"
     end
 
   end
@@ -49,19 +35,17 @@ class Field
 
     a = coord.chop.to_i + 1
     b = @opponent_x_coord[coord[-1]]
-    c = @player_two.user_class.x_hash[coord[-1]]
+    c = @player_two.board_total.x_coord_hash[coord[-1]]
 
-    if @player_one.user_class.check_for_ship(coord) == true
-      @player_two.user_class.use_board[a][b] = "@"
-      @player_one.user_class.use_board[a][c] = "@"
+    if @player_one.board_total.check_for_ship(coord) == true
+      @player_two.board_total.board[a][b] = "@"
+      @player_one.board_total.board[a][c] = "@"
     else
-      @player_two.user_class.use_board[a][b] = "o"
-      @player_one.user_class.use_board[a][c] = "o"
+      @player_two.board_total.board[a][b] = "o"
+      @player_one.board_total.board[a][c] = "o"
     end
 
   end
-
-
 
 end
 

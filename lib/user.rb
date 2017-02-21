@@ -25,30 +25,26 @@ class User_input
 
   end
 
-  def user_class
-    @board_total
-  end
-
   def check_placement(place, direction, ship_length)
 
     if direction == "horizontal"
-      return false if @board_total.x_hash[place[-1]] >= 12 - ship_length ; true
+      return false if @board_total.x_coord_hash[place[-1]] >= 12 - ship_length ; true
     elsif direction == "vertical"
       return false if place.chop.to_i >= 12 - ship_length ; true
     end
   end
 
   def check_clashes(place, direction, ship_length)
-    x_coord = @board_total.x_hash[place[-1]]
+    x_coord = @board_total.x_coord_hash[place[-1]]
     y_coord = place.chop.to_i + 1
     if check_placement(place, direction, ship_length) == false
       false
     elsif direction == "horizontal"
-      going_here = @board_total.use_board[y_coord][x_coord...x_coord + ship_length]
+      going_here = @board_total.board[y_coord][x_coord...x_coord + ship_length]
       return false if going_here.include?("X") ; true
     elsif direction == "vertical"
       running_total = [*0...ship_length]
-      a = running_total.map { |x| user_class.use_board[y_coord + x][x_coord] }
+      a = running_total.map { |x| @board_total.board[y_coord + x][x_coord] }
       return false if a.include?("X") ; true
     end
   end
@@ -69,18 +65,6 @@ class User_input
     else
       "vertical"
     end
-  end
-
-  def hit(coord)
-    # => So for p1 this needs to hit a place on the p2
-    # => board and on a different co-ordinate on the
-    # => p1 board, also needs to change the state of
-    # => the ship that's been hit. So maybe the placement
-    # => of each ship needs to be recorded somehow.
-    # => Also need to define what 'sunk' is, and it's possible
-    # => that my placement should have each cell linked
-    # => to the ship array.
-
   end
 
 end

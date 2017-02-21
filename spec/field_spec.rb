@@ -37,21 +37,21 @@ describe Field do
 
  before(:each) do
    @start = new_game
-   @start.p1.user_class.place_ac("4F", "horizontal")
-   @start.p1.user_class.place_battleship("1B", "vertical")
-   @start.p1.user_class.place_sub("6D", "horizontal")
-   @start.p1.user_class.place_destroyer("8I", "vertical")
-   @start.p1.user_class.place_patrol("9B", "horizontal")
-   @start.p2.user_class.place_ac("6B", "vertical")
-   @start.p2.user_class.place_battleship("4C", "horizontal")
-   @start.p2.user_class.place_sub("2I", "vertical")
-   @start.p2.user_class.place_destroyer("8F", "horizontal")
-   @start.p2.user_class.place_patrol("1A", "horizontal")
+   @start.player_one.board_total.place_ac("4F", "horizontal")
+   @start.player_one.board_total.place_battleship("1B", "vertical")
+   @start.player_one.board_total.place_sub("6D", "horizontal")
+   @start.player_one.board_total.place_destroyer("8I", "vertical")
+   @start.player_one.board_total.place_patrol("9B", "horizontal")
+   @start.player_one.board_total.place_ac("6B", "vertical")
+   @start.player_one.board_total.place_battleship("4C", "horizontal")
+   @start.player_one.board_total.place_sub("2I", "vertical")
+   @start.player_one.board_total.place_destroyer("8F", "horizontal")
+   @start.player_one.board_total.place_patrol("1A", "horizontal")
  end
 
  it "hits an opposing players ships and marks change on both players boards" do
    @start.player_one_hit("1A")
-   expect(@start.p1.user_class.show_board).to eq(
+   expect(@start.player_one.board_total.show_board).to eq(
    [
       ["---YOUR BATTLEFIELD---","---","-OPPONENT BATTLEFIELD-"],
       ["  ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J","---","  ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",],
@@ -71,7 +71,7 @@ describe Field do
 
  it "hits an opposing players ships and marks change on both players boards 2" do
    @start.player_one_hit("1A")
-   expect(@start.p2.user_class.show_board).to eq([
+   expect(@start.player_one.board_total.show_board).to eq([
     ["---YOUR BATTLEFIELD---","---","-OPPONENT BATTLEFIELD-"],
     ["  ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J","---","  ", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J",],
     [" 1", "@", "X", "~", "~", "~", "~", "~", "~", "~", "~","---", " 1", "~", "~", "~", "~", "~", "~", "~", "~", "~", "~"],
@@ -90,12 +90,12 @@ describe Field do
 
  it "does the above for both players" do
    @start.player_two_hit("1A")
-   expect(@start.p1.user_class.use_board[2][1]).to eql("o")
+   expect(@start.player_one.board_total.use_board[2][1]).to eql("o")
  end
 
  it "does the above for both players" do
    @start.player_two_hit("1A")
-   expect(@start.p2.user_class.use_board[2][13]).to eql("o")
+   expect(@start.player_one.board_total.use_board[2][13]).to eql("o")
  end
 
 
