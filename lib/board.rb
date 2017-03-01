@@ -39,7 +39,7 @@ class Playing_field
     end
   end
 
-  def place_ac(place, direction)
+
     coord = place[-1]
     @acplace = place
     @acdirection = direction
